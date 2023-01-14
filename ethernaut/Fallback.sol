@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 //https://ethernaut.openzeppelin.com/level/0x80934BE6B8B872B364b470Ca30EaAd8AEAC4f63F
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
 contract Fallback {
 
