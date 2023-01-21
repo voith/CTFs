@@ -59,6 +59,7 @@ contract TestRecovery is Test {
 		);
 		(bool res, ) = payable(token).call{value: 0.001 ether}("");
 		require(res);
+		vm.stopPrank();
     }
 
     function testExploit() external {
