@@ -58,8 +58,10 @@ contract TestMagicNumber is Test {
     }
 
     function testExploit() external {
+        address _exploitSolver = magicNumber.solver();
         solver = Solver(magicNumber.solver());
         uint num = solver.whatIsTheMeaningOfLife();
+        assertTrue(_exploitSolver.code.length <= 10);
         assertEq(num, 42);
     }
 }
