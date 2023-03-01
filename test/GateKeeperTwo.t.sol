@@ -22,8 +22,8 @@ contract TestGateKeeperTwo is Test {
     }
 
     function testExploit() external {
-        vm.prank(attacker, attacker);
         assertEq(gateKeeperTwo.entrant(), address(0));
+        vm.prank(attacker, attacker);
         new ExploitGateKeeperTwo(address(gateKeeperTwo));
         assertEq(gateKeeperTwo.entrant(), attacker);
     }
